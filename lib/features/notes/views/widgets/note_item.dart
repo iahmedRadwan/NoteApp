@@ -41,9 +41,9 @@ class NoteItemListTile extends StatelessWidget {
                 maxLines: 5,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 18,
                   fontWeight: FontWeight.normal,
-                  color: Colors.grey.withOpacity(0.8),
+                  color: Colors.black45,
                 ),
               ),
               trailing: Icon(
@@ -57,7 +57,7 @@ class NoteItemListTile extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.normal,
-                color: Colors.grey.withOpacity(0.8),
+                color: Colors.black45,
               ),
             )
           ],

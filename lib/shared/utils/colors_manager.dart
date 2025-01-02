@@ -2,7 +2,7 @@ import 'dart:ui';
 
 class ColorManagerHelper {
   /// main app color
-  static const Color kMainColor = Color(0xffD75A2B);
+  static const Color kMainColor = Color(0xff62FCD7);
 
   /// main white color
   static const Color kWhiteColor = Color(0xffffffff);
