@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../../../shared/utils/colors_manager.dart';
 import '../../../core/view/components/custom_button.dart';
+import 'custom_text_field.dart';
 
 class BottomSheetWidget extends StatelessWidget {
   const BottomSheetWidget({super.key});
@@ -13,28 +12,13 @@ class BottomSheetWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Title",
-              hintStyle: TextStyle(color: ColorManagerHelper.kMainColor),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-          ),
+          CustomTextField(hintText: "Title"),
           SizedBox(
             height: 16,
           ),
-          TextField(
-            minLines: 5,
-            maxLines: 10,
-            decoration: InputDecoration(
-              hintText: "Description",
-              hintStyle: TextStyle(color: ColorManagerHelper.kMainColor),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
+          CustomTextField(
+            hintText: 'Describtion',
+            maxLine: 5,
           ),
           Spacer(),
           CustomButton(

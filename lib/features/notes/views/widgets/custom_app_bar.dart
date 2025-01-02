@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
-
 import '../../../../shared/utils/colors_manager.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar(
+      {super.key, required this.appBarTitle, required this.icon});
+  final String appBarTitle;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Notes",
+            appBarTitle,
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.normal,
@@ -27,7 +28,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               color: ColorManagerHelper.kGreyColor.withOpacity(0.2),
             ),
             child: Icon(
-              IconlyBroken.search,
+              icon,
               size: 20,
             ),
           ),
