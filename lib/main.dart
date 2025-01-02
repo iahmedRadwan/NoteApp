@@ -16,8 +16,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeManagerHelper.lightTheme(),
       darkTheme: ThemeManagerHelper.darkTheme(),
+      themeMode: ThemeMode.dark,
       routes: AppRouter.appRouter,
-      initialRoute: HomeView.routeName,
+      initialRoute: NoteView.routeName,
     );
   }
 }
