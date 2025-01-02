@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../widgets/note_view_body.dart';
+import 'widgets/custom_app_bar.dart';
+import 'widgets/note_view_body.dart';
 
 class NoteView extends StatelessWidget {
   const NoteView({super.key});
@@ -8,8 +8,18 @@ class NoteView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: CustomAppBar(),
       body: NoteViewBody(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Color(0xff62FCD7),
+        shape: StadiumBorder(),
+        child: Icon(
+          Icons.add,
+          color: Colors.black,
+        ),
+      ),
     );
   }
 }
