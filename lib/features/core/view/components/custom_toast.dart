@@ -6,11 +6,14 @@ class ToastManager {
   static void customToastError({
     required BuildContext context,
     required String title,
+    Color color = Colors.white,
     String? description,
-  }) => CherryToast.error(
+  }) =>
+      CherryToast.error(
         title: Text(
           title,
-          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 14, fontWeight: FontWeight.bold, color: color),
         ),
         description: description != null
             ? Text(
@@ -22,15 +25,19 @@ class ToastManager {
         toastDuration: const Duration(milliseconds: 5000),
         displayCloseButton: false,
       ).show(context);
+
   /// Warning Toast
   static void customToastWarning({
+    Color color = Colors.white,
     required BuildContext context,
     required String title,
     String? description,
-  }) => CherryToast.warning(
+  }) =>
+      CherryToast.warning(
         title: Text(
           title,
-          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 14, fontWeight: FontWeight.bold, color: color),
         ),
         description: description != null
             ? Text(
@@ -42,15 +49,19 @@ class ToastManager {
         toastDuration: const Duration(milliseconds: 5000),
         displayCloseButton: false,
       ).show(context);
+
   /// Success Toast
   static void customToastSuccess({
+    Color color = Colors.white,
     required BuildContext context,
     required String title,
     String? description,
-  }) => CherryToast.success(
+  }) =>
+      CherryToast.success(
         title: Text(
           title,
-          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 14, fontWeight: FontWeight.bold, color: color),
         ),
         description: description != null
             ? Text(
