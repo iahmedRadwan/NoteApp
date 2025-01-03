@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:note_app/features/core/view/components/custom_toast.dart';
 import 'package:note_app/features/notes/models/note_model.dart';
 import 'package:note_app/features/notes/view_models/add_note_cubit/add_note_cubit.dart';
@@ -53,53 +52,63 @@ class _AddNoteFormState extends State<AddNoteForm> {
       },
       builder: (context, state) {
         var addNoteCubit = AddNoteCubit.get(context);
-        return Form(
-          key: formKey,
-          autovalidateMode: autovalidateMode,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomTextField(
-                hintText: "Title",
-                onSaved: (value) {
-                  title = value;
-                },
+        return Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: AbsorbPointer(
+            absorbing: state is AddNoteLoadingState,
+            child: Form(
+              key: formKey,
+              autovalidateMode: autovalidateMode,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomTextField(
+                    hintText: "Title",
+                    onSaved: (value) {
+                      title = value;
+                    },
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  CustomTextField(
+                    hintText: 'Describtion',
+                    maxLine: 5,
+                    onSaved: (value) {
+                      subTitle = value;
+                    },
+                  ),
+                  SizedBox(
+                    height: 32,
+                  ),
+                  state is AddNoteLoadingState
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : CustomButton(
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              formKey.currentState!.save();
+                              addNoteCubit.addNote(NoteModel(
+                                  noteTitle: title!,
+                                  index: 1,
+                                  noteSubtitle: subTitle!,
+                                  noteDate: "May 21,2022"));
+                            } else {
+                              autovalidateMode = AutovalidateMode.always;
+                              setState(() {});
+                            }
+                          },
+                          buttonText: "Add",
+                          fontSize: 18,
+                          borderRadius: 12,
+                          textColor: Colors.black,
+                        ),
+                ],
               ),
-              SizedBox(
-                height: 16,
-              ),
-              CustomTextField(
-                hintText: 'Describtion',
-                maxLine: 5,
-                onSaved: (value) {
-                  subTitle = value;
-                },
-              ),
-              Spacer(),
-              state is AddNoteLoadingState
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : CustomButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          formKey.currentState!.save();
-                          addNoteCubit.addNote(NoteModel(
-                              noteTitle: title!,
-                              index: 1,
-                              noteSubtitle: subTitle!,
-                              noteDate: "May 21,2022"));
-                        } else {
-                          autovalidateMode = AutovalidateMode.always;
-                          setState(() {});
-                        }
-                      },
-                      buttonText: "Add",
-                      fontSize: 18,
-                      borderRadius: 12,
-                      textColor: Colors.black,
-                    ),
-            ],
+            ),
           ),
         );
       },

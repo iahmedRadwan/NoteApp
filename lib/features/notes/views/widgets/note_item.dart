@@ -7,6 +7,7 @@ class NoteItemListTile extends StatelessWidget {
   const NoteItemListTile({
     super.key,
     required this.noteModel,
+    required this.index,
   });
   final List<Color> kColors = const [
     Color(0xffAC3931),
@@ -16,6 +17,7 @@ class NoteItemListTile extends StatelessWidget {
     Color(0xff482C3D),
   ];
   final NoteModel noteModel;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class NoteItemListTile extends StatelessWidget {
         Navigator.pushNamed(context, EditNoteView.routeName);
       },
       child: Card(
-        color: kColors[noteModel.index % kColors.length],
+        color: kColors[index % kColors.length],
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
