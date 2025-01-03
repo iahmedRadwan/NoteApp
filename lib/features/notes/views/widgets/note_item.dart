@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:note_app/features/notes/models/note_model.dart';
+import 'package:note_app/features/notes/view_models/get_note_cubit/get_notes_cubit.dart';
 import 'package:note_app/features/notes/views/edit_note_view.dart';
 
 class NoteItemListTile extends StatelessWidget {
@@ -23,7 +25,8 @@ class NoteItemListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, EditNoteView.routeName);
+        Navigator.pushNamed(context, EditNoteView.routeName,
+            arguments: noteModel);
       },
       child: Card(
         color: kColors[index % kColors.length],
@@ -33,32 +36,37 @@ class NoteItemListTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               ListTile(
-                title: Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0),
-                  child: Text(
-                    noteModel.noteTitle,
+                  title: Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Text(
+                      noteModel.noteTitle,
+                      style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black),
+                    ),
+                  ),
+                  subtitle: Text(
+                    noteModel.noteSubtitle,
+                    maxLines: 5,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.black),
+                      fontSize: 18,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black45,
+                    ),
                   ),
-                ),
-                subtitle: Text(
-                  noteModel.noteSubtitle,
-                  maxLines: 5,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black45,
-                  ),
-                ),
-                trailing: Icon(
-                  IconlyBroken.delete,
-                  size: 32,
-                  color: Colors.black,
-                ),
-              ),
+                  trailing: IconButton(
+                    onPressed: () {
+                      noteModel.delete();
+                      BlocProvider.of<GetNotesCubit>(context).getNotes();
+                    },
+                    icon: Icon(
+                      IconlyBroken.delete,
+                      size: 32,
+                      color: Colors.black,
+                    ),
+                  )),
               Text(
                 noteModel.noteDate,
                 style: TextStyle(

@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/features/core/view/components/custom_toast.dart';
 import 'package:note_app/features/notes/models/note_model.dart';
 import 'package:note_app/features/notes/view_models/add_note_cubit/add_note_cubit.dart';
+import 'package:note_app/features/notes/view_models/get_note_cubit/get_notes_cubit.dart';
+import '../../../../shared/constants/app_dates.dart';
 import '../../../core/view/components/custom_button.dart';
 import 'custom_text_field.dart';
 
@@ -40,6 +42,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
       listener: (context, state) {
         // TODO: implement listener
         if (state is AddNoteSuccessState) {
+          BlocProvider.of<GetNotesCubit>(context).getNotes();
           Navigator.pop(context);
           ToastManager.customToastSuccess(
               color: Colors.black, context: context, title: "Note Add Success");
@@ -93,9 +96,10 @@ class _AddNoteFormState extends State<AddNoteForm> {
                               formKey.currentState!.save();
                               addNoteCubit.addNote(NoteModel(
                                   noteTitle: title!,
-                                  index: 1,
                                   noteSubtitle: subTitle!,
-                                  noteDate: "May 21,2022"));
+                                  noteDate: AppDateTimeHelper
+                                      .getDayNumberAndAbbreviationMonthNameAndYearNumber(
+                                          DateTime.now().toString())));
                             } else {
                               autovalidateMode = AutovalidateMode.always;
                               setState(() {});
